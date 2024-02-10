@@ -2,6 +2,7 @@ import React from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import Guest from '../../layouts/Guest'
 import ButtonOutline from '../../../components/ButtonOutline/ButtonOutline'
+import InputFloating from '../../../components/InputFloating/InputFloating'
 
 export default function ForgotPassword() {
     const navigate = useNavigate()
@@ -16,8 +17,7 @@ export default function ForgotPassword() {
             <div>
                 <form className='pt-10'>
                     <div className='space-y-3 py-2'>
-                        <label htmlFor="email" className='input-label'>Email</label>
-                        <input type="text" id='email' name='email' className='w-full input' placeholder='email@mail.com' required />
+                        <InputFloating label={'Email'} type='email' color='white' required />
                     </div>
 
                     <div>

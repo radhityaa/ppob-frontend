@@ -20,6 +20,13 @@ const History = lazy(() => import("./pages/Deposit/History"))
 
 // NOTE - Account
 const Account = lazy(() => import("./pages/Account"))
+const UpdateAccount = lazy(() => import("./pages/Account/UpdateAccount"))
+
+// NOTE - Saldo
+const Saldo = lazy(() => import("./pages/Saldo"))
+
+// NOTE - Transaction
+const Transaction = lazy(() => import("./pages/Transaction"))
 
 export default function App() {
   return (
@@ -44,6 +51,13 @@ export default function App() {
 
         {/* NOTE - Account */}
         <Route path='/account' element={<Account />} />
+        <Route path='/account/id' element={<UpdateAccount />} />
+
+        {/* NOTE - Saldo */}
+        <Route path='/saldo' element={<Saldo />} />
+
+        {/* NOTE - Transaction */}
+        <Route path='/transaction' element={<Transaction />} />
       </Routes>
     </Suspense>
   )

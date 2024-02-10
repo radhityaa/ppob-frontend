@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import Guest from '../../layouts/Guest'
 import ButtonOutline from '../../../components/ButtonOutline/ButtonOutline'
 import { FloatingLabel } from 'flowbite-react'
+import InputFloating from '../../../components/InputFloating/InputFloating'
 
 export default function Login() {
     const navigate = useNavigate()
@@ -17,14 +18,14 @@ export default function Login() {
             <div>
                 <form className='pt-10'>
                     <div className='space-y-3 py-2'>
-                        <FloatingLabel variant="standard" label="Username" className='text-white peer-focus:text-white focus:border-white' required />
+                        <InputFloating label={'Username'} color='white' required/>
                     </div>
                     <div>
                         <div className="flex items-center justify-end">
                             <NavLink to={'/forgot-password'} className='text-white hover:underline font-semibold text-sm'>Lupa Password?</NavLink>
                         </div>
                         <div className='-mt-2'>
-                            <FloatingLabel variant="standard" label="Password" type='password' className='text-white peer-focus:text-white focus:border-white' required />
+                        <InputFloating label={'Password'} type='password' color='white' required/>
                         </div>
                     </div>
 

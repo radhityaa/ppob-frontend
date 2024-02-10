@@ -1,18 +1,16 @@
-import { Tab } from '@headlessui/react'
-import { useState } from 'react'
-import { NavLink } from 'react-router-dom'
-import Header from '../../components/Header/Header'
-import PencilSquare from '../../components/PencilSquare/PencilSquare'
-import App from '../layouts/App'
+import { Tab } from "@headlessui/react";
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
+import SimpleHeader from "../../components/SimpleHeader/SimpleHeader";
+import App from "../layouts/App";
 
-export default function Account() {
-
+export default function Transaction() {
     function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
     }
 
     let [categories] = useState({
-        Menu: [
+        Semua: [
             {
                 id: 1,
                 title: 'Transaksi',
@@ -25,32 +23,8 @@ export default function Account() {
                 value: 'Rp. 50.000',
                 url: '/saldo'
             },
-            {
-                id: 3,
-                title: "Pemberitahuan",
-                value: '',
-                url: '#2'
-            },
-            {
-                id: 4,
-                title: "Hubungi CS",
-                value: '',
-                url: '#2'
-            },
-            {
-                id: 5,
-                title: "Pengaturan",
-                value: '',
-                url: '#2'
-            },
-            {
-                id: 6,
-                title: "Keluar",
-                value: '',
-                url: '#2'
-            },
         ],
-        Profil: [
+        Sukses: [
             {
                 id: 1,
                 title: 'Nama Lengkap',
@@ -63,45 +37,56 @@ export default function Account() {
                 value: 'ramaadit123',
                 url: '#4'
             },
+        ],
+        "Dalam Proses": [
             {
-                id: 3,
-                title: 'Email',
-                value: 'ramaadhityasetiadi002@gmail.com',
-                url: '#4'
+                id: 1,
+                title: 'Nama Lengkap',
+                value: 'Rama Adhitya Setiadi',
+                url: '#3'
             },
             {
-                id: 4,
-                title: 'Nomor HP',
-                value: '0895347113987',
+                id: 2,
+                title: 'Username',
+                value: 'ramaadit123',
                 url: '#4'
             },
+        ],
+        "Menunggu Pembayaran": [
             {
-                id: 5,
-                title: 'Status Akun',
-                value: 'Terverifikasi',
-                url: '#4'
+                id: 1,
+                title: 'Nama Lengkap',
+                value: 'Rama Adhitya Setiadi',
+                url: '#3'
             },
             {
-                id: 6,
-                title: 'Tanggal Mendaftar',
-                value: '20/12/2021 07:07',
+                id: 2,
+                title: 'Username',
+                value: 'ramaadit123',
+                url: '#4'
+            },
+        ],
+        Gagal: [
+            {
+                id: 1,
+                title: 'Nama Lengkap',
+                value: 'Rama Adhitya Setiadi',
+                url: '#3'
+            },
+            {
+                id: 2,
+                title: 'Username',
+                value: 'ramaadit123',
                 url: '#4'
             },
         ],
     })
 
     return (
-        <App title='Profil'>
-            <Header />
+        <App title='Transaksi'>
+            <SimpleHeader title={'Transaksi'}/>
 
-            <div className='text-center -mt-[90px]'>
-                <div className='text-white font-bold'>ramaadit123</div>
-                <div className='text-white text-xs'>0895347113987</div>
-                <NavLink to={'/account/id'} className='mt-2 flex justify-center text-white cursor-pointer'><PencilSquare /></NavLink>
-            </div>
-
-            <div className='mt-5'>
-                <div className="w-full">
+            <div className="w-full">
                     <Tab.Group>
                         <Tab.List className="flex bg-blue-900/20">
                             {Object.keys(categories).map((category) => (
@@ -161,7 +146,6 @@ export default function Account() {
                         </Tab.Panels>
                     </Tab.Group>
                 </div>
-            </div>
         </App>
     )
 }
