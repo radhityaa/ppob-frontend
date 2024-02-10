@@ -2,6 +2,7 @@ import React from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import Guest from '../../layouts/Guest'
 import ButtonOutline from '../../../components/ButtonOutline/ButtonOutline'
+import { FloatingLabel } from 'flowbite-react'
 
 export default function Register() {
     const navigate = useNavigate()
@@ -16,20 +17,16 @@ export default function Register() {
             <div>
                 <form className='pt-10'>
                     <div className='space-y-3 py-2'>
-                        <label htmlFor="name" className='input-label'>Nama Lengkap*</label>
-                        <input type="text" className='w-full input' placeholder='Rama Adhitya Setiadi' required />
+                        <FloatingLabel variant="standard" label="Nama Lengkap" className='text-white peer-focus:text-white focus:border-white' required />
                     </div>
                     <div className='space-y-3 py-2'>
-                        <label htmlFor="email" className='input-label'>Alamat Email*</label>
-                        <input type="text" className='w-full input' placeholder='example@gmail.com' required />
+                        <FloatingLabel variant="standard" label="Email" type='email' className='text-white peer-focus:text-white focus:border-white' required />
                     </div>
                     <div className='space-y-3 py-2'>
-                        <label htmlFor="phone" className='input-label'>Nomor HP*</label>
-                        <input type="number" className='w-full input' placeholder='0895347xxxxxx' required />
+                        <FloatingLabel variant="standard" label="Nomor HP" type='number' className='text-white peer-focus:text-white focus:border-white' required />
                     </div>
                     <div className='space-y-3 py-2'>
-                        <label htmlFor="password" className='input-label'>Password*</label>
-                        <input type="password" className='w-full input' placeholder='*****' required />
+                        <FloatingLabel variant="standard" label="Password" type='password' className='text-white peer-focus:text-white focus:border-white' required />
                     </div>
 
                     <div>

@@ -17,14 +17,14 @@ export default function Login() {
             <div>
                 <form className='pt-10'>
                     <div className='space-y-3 py-2'>
-                        <FloatingLabel variant="standard" label="Username" className='text-white peer-focus:text-white focus:border-white' />
+                        <FloatingLabel variant="standard" label="Username" className='text-white peer-focus:text-white focus:border-white' required />
                     </div>
                     <div>
                         <div className="flex items-center justify-end">
                             <NavLink to={'/forgot-password'} className='text-white hover:underline font-semibold text-sm'>Lupa Password?</NavLink>
                         </div>
                         <div className='-mt-2'>
-                            <FloatingLabel variant="standard" label="Password" type='password' className='text-white peer-focus:text-white focus:border-white' />
+                            <FloatingLabel variant="standard" label="Password" type='password' className='text-white peer-focus:text-white focus:border-white' required />
                         </div>
                     </div>
 
