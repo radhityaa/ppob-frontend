@@ -34,7 +34,7 @@ export default function Home() {
                     </div>
                 </div>
 
-                <div className='grid grid-cols-4 mt-8'>
+                <div className='grid grid-cols-3 mt-8'>
                     <div className='flex justify-center cursor-pointer' onClick={() => navigate('/account')}>
                         <div className='flex-col'>
                             <img src="/images/user.png" alt="user" className='w-7 h-7 mx-auto' />
@@ -45,14 +45,7 @@ export default function Home() {
                     <div className='flex justify-center cursor-pointer'>
                         <div className='flex-col'>
                             <img src="/images/user.png" alt="user" className='w-7 h-7 mx-auto' />
-                            <h4 className='font-medium text-sm text-gray-custom text-center'>Notifikasi</h4>
-                        </div>
-                    </div>
-
-                    <div className='flex justify-center cursor-pointer'>
-                        <div className='flex-col'>
-                            <img src="/images/user.png" alt="user" className='w-7 h-7 mx-auto' />
-                            <h4 className='font-medium text-sm text-gray-custom text-center'>Testimoni</h4>
+                            <h4 className='font-medium text-sm text-gray-custom text-center'>Pemberitahuan</h4>
                         </div>
                     </div>
 
