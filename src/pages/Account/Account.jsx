@@ -1,17 +1,26 @@
 import { Tab } from '@headlessui/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import Header from '../../components/Header/Header'
 import PencilSquare from '../../components/PencilSquare/PencilSquare'
 import App from '../layouts/App'
+import FormatCurrency from '../../utils/FormatCurrency'
+import FormatDate from '../../utils/FormatDate'
+import axios from 'axios'
 
 export default function Account() {
+    const { user, loading } = useSelector((state) => state.user)
 
     function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
     }
 
-    let [categories] = useState({
+    function handleLogout() {
+        alert('oke')
+    }
+
+    const [categories, setCategories] = useState({
         Menu: [
             {
                 id: 1,
@@ -22,7 +31,7 @@ export default function Account() {
             {
                 id: 2,
                 title: "Saldo",
-                value: 'Rp. 50.000',
+                value: '',
                 url: '/saldo'
             },
             {
@@ -47,7 +56,8 @@ export default function Account() {
                 id: 6,
                 title: "Keluar",
                 value: '',
-                url: '/'
+                url: '#',
+                onClick: () => handleLogout()
             },
         ],
         Profil: [
@@ -90,15 +100,66 @@ export default function Account() {
         ],
     })
 
+    useEffect(() => {
+        if (user) {
+            const saldoFormatted = FormatCurrency(user.saldo)
+            setCategories(prevCategories => ({
+                ...prevCategories,
+                Menu: prevCategories.Menu.map(item => item.title === 'Saldo' ? { ...item, value: saldoFormatted } : item)
+            }))
+
+            const updatedProfile = [
+                {
+                    id: 1,
+                    title: 'Nama Lengkap',
+                    value: user.name
+                },
+                {
+                    id: 2,
+                    title: 'Username',
+                    value: user.username
+                },
+                {
+                    id: 3,
+                    title: 'Email',
+                    value: user.email
+                },
+                {
+                    id: 4,
+                    title: 'Nomor HP',
+                    value: user.phone
+                },
+                {
+                    id: 5,
+                    title: 'Status Akun',
+                    value: user.status ? 'Terverifikasi' : 'Belum Verifikasi'
+                },
+                {
+                    id: 6,
+                    title: 'Tanggal Mendaftar',
+                    value: FormatDate(user.createdAt)
+                },
+            ]
+            setCategories(prevCategories => ({
+                ...prevCategories,
+                Profil: updatedProfile
+            }))
+        }
+    }, [user])
+
     return (
         <App title='Profil'>
             <Header />
 
-            <div className='text-center -mt-[90px]'>
-                <div className='text-white font-bold'>ramaadit123</div>
-                <div className='text-white text-xs'>0895347113987</div>
-                <NavLink to={'/account/id'} className='mt-2 flex justify-center text-white cursor-pointer'><PencilSquare /></NavLink>
-            </div>
+            {loading ? (
+                <div>Loading...</div>
+            ) : (
+                <div className='text-center -mt-[90px]'>
+                    <div className='text-white font-bold'>{user?.username}</div>
+                    <div className='text-white text-xs'>{user?.phone}</div>
+                    <NavLink to={'/account/id'} className='mt-2 flex justify-center text-white cursor-pointer'><PencilSquare /></NavLink>
+                </div>
+            )}
 
             <div className='mt-5'>
                 <div className="w-full">
@@ -148,6 +209,7 @@ export default function Account() {
 
                                                 <NavLink
                                                     to={post.url}
+                                                    onClick={post.onClick}
                                                     className={classNames(
                                                         'absolute inset-0',
                                                         'focus:z-10 focus:outline-none'

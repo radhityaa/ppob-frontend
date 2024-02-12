@@ -1,5 +1,6 @@
 import React, { Suspense, lazy } from 'react'
 import { Route, Routes } from 'react-router-dom'
+import * as Middleware from './middleware/App'
 
 // SECTION - Route Lazy
 
@@ -46,40 +47,40 @@ export default function App() {
         <Route path='*' element={<div>Not Found!</div>} />
 
         {/* NOTE - Auth */}
-        <Route path='/' element={<Login />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/forgot-password' element={<ForgotPassword />} />
-        <Route path='/verifikasi' element={<VerifOtp />} />
+        <Route path='/' element={<Middleware.Guest render={<Login />} />} />
+        <Route path='/register' element={<Middleware.Guest render={<Register />} />} />
+        <Route path='/forgot-password' element={<Middleware.Guest render={<ForgotPassword />} />} />
+        <Route path='/verifikasi' element={<Middleware.Guest render={<VerifOtp />} />} />
 
         {/* NOTE - Home */}
-        <Route path='/dashboard' element={<Home />} />
+        <Route path='/dashboard' element={<Middleware.Authenticated render={<Home />} />} />
 
         {/* NOTE - Deposit */}
-        <Route path='/deposit' element={<Deposit />} />
-        <Route path='/deposit/history' element={<History />} />
-        <Route path='/payment-method' element={<PaymentMethod />} />
-        <Route path='/payment/id' element={<Payment />} />
+        <Route path='/deposit' element={<Middleware.Authenticated render={<Deposit />} />} />
+        <Route path='/deposit/history' element={<Middleware.Authenticated render={<History />} />} />
+        <Route path='/payment-method' element={<Middleware.Authenticated render={<PaymentMethod />} />} />
+        <Route path='/payment/id' element={<Middleware.Authenticated render={<Payment />} />} />
 
         {/* NOTE - Account */}
-        <Route path='/account' element={<Account />} />
-        <Route path='/account/id' element={<UpdateAccount />} />
+        <Route path='/account' element={<Middleware.Authenticated render={<Account />} />} />
+        <Route path='/account/id' element={<Middleware.Authenticated render={<UpdateAccount />} />} />
 
         {/* NOTE - Saldo */}
-        <Route path='/saldo' element={<Saldo />} />
+        <Route path='/saldo' element={<Middleware.Authenticated render={<Saldo />} />} />
 
         {/* NOTE - Transaction */}
-        <Route path='/transaction' element={<Transaction />} />
-        <Route path='/transaction/id' element={<DetailTransaction />} />
+        <Route path='/transaction' element={<Middleware.Authenticated render={<Transaction />} />} />
+        <Route path='/transaction/id' element={<Middleware.Authenticated render={<DetailTransaction />} />} />
 
         {/* NOTE - Notification */}
-        <Route path='/notification' element={<Notification />} />
-        <Route path='/notification/id' element={<DetailNotification />} />
+        <Route path='/notification' element={<Middleware.Authenticated render={<Notification />} />} />
+        <Route path='/notification/id' element={<Middleware.Authenticated render={<DetailNotification />} />} />
 
         {/* NOTE - Customer Service */}
-        <Route path='/customer-service' element={<CustomerService />} />
+        <Route path='/customer-service' element={<Middleware.Authenticated render={<CustomerService />} />} />
 
         {/* NOTE - Setting */}
-        <Route path='/setting' element={<Setting />} />
+        <Route path='/setting' element={<Middleware.Authenticated render={<Setting />} />} />
       </Routes>
     </Suspense>
   )

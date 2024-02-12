@@ -1,12 +1,48 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
-import Guest from '../../layouts/Guest'
 import ButtonOutline from '../../../components/ButtonOutline/ButtonOutline'
-import { FloatingLabel } from 'flowbite-react'
 import InputFloating from '../../../components/InputFloating/InputFloating'
+import Guest from '../../layouts/Guest'
+import axios from 'axios'
+import { Notyf } from 'notyf'
+import Cookies from 'js-cookie'
 
 export default function Login() {
     const navigate = useNavigate()
+
+    const notyf = new Notyf({
+        position: {
+            x: 'center',
+            y: 'top'
+        }
+    })
+
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+
+    async function onSubmit(e) {
+        e.preventDefault()
+        const request = {
+            username,
+            password
+        }
+
+        await axios.post('/auth/login', request)
+            .then(res => {
+                notyf.success(res.data.message)
+                Cookies.set('token', res.data.data)
+                navigate('/dashboard')
+            })
+            .catch(err => {
+                if (Array.isArray(err.response.data.message)) {
+                    err.response.data.message.forEach(errorMessage => {
+                        notyf.error(errorMessage.msg)
+                    })
+                } else {
+                    notyf.error(err.response.data.message)
+                }
+            })
+    }
 
     return (
         <Guest title='Login'>
@@ -16,16 +52,16 @@ export default function Login() {
             </div>
 
             <div>
-                <form className='pt-10'>
+                <form className='pt-10' onSubmit={onSubmit}>
                     <div className='space-y-3 py-2'>
-                        <InputFloating label={'Username'} color='white' required/>
+                        <InputFloating tabIndex='1' label={'Username'} color='white' value={username} onChange={(e) => setUsername(e.target.value)} required />
                     </div>
                     <div>
                         <div className="flex items-center justify-end">
                             <NavLink to={'/forgot-password'} className='text-white hover:underline font-semibold text-sm'>Lupa Password?</NavLink>
                         </div>
                         <div className='-mt-2'>
-                        <InputFloating label={'Password'} type='password' color='white' required/>
+                            <InputFloating tabIndex='2' label={'Password'} type='password' color='white' value={password} onChange={(e) => setPassword(e.target.value)} required />
                         </div>
                     </div>
 
@@ -34,7 +70,7 @@ export default function Login() {
                     </div>
 
                     <div className='pt-7'>
-                        <ButtonOutline onClick={() => navigate('/dashboard')}>Login</ButtonOutline>
+                        <ButtonOutline type='submit'>Login</ButtonOutline>
                     </div>
                 </form>
             </div>
