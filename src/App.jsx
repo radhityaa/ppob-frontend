@@ -27,6 +27,17 @@ const Saldo = lazy(() => import("./pages/Saldo"))
 
 // NOTE - Transaction
 const Transaction = lazy(() => import("./pages/Transaction"))
+const DetailTransaction = lazy(() => import("./pages/Transaction/DetailTransaction"))
+
+// NOTE - Notification
+const Notification = lazy(() => import('./pages/Notification'))
+const DetailNotification = lazy(() => import('./pages/Notification/DetailNotification'))
+
+// NOTE - Customer Service
+const CustomerService = lazy(() => import('./pages/CustomerService'))
+
+// NOTE - Setting
+const Setting = lazy(() => import('./pages/Setting'))
 
 export default function App() {
   return (
@@ -58,6 +69,17 @@ export default function App() {
 
         {/* NOTE - Transaction */}
         <Route path='/transaction' element={<Transaction />} />
+        <Route path='/transaction/id' element={<DetailTransaction />} />
+
+        {/* NOTE - Notification */}
+        <Route path='/notification' element={<Notification />} />
+        <Route path='/notification/id' element={<DetailNotification />} />
+
+        {/* NOTE - Customer Service */}
+        <Route path='/customer-service' element={<CustomerService />} />
+
+        {/* NOTE - Setting */}
+        <Route path='/setting' element={<Setting />} />
       </Routes>
     </Suspense>
   )

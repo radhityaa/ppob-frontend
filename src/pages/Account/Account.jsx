@@ -29,25 +29,25 @@ export default function Account() {
                 id: 3,
                 title: "Pemberitahuan",
                 value: '',
-                url: '#2'
+                url: '/notification'
             },
             {
                 id: 4,
                 title: "Hubungi CS",
                 value: '',
-                url: '#2'
+                url: '/customer-service'
             },
             {
                 id: 5,
                 title: "Pengaturan",
                 value: '',
-                url: '#2'
+                url: '/setting'
             },
             {
                 id: 6,
                 title: "Keluar",
                 value: '',
-                url: '#2'
+                url: '/'
             },
         ],
         Profil: [

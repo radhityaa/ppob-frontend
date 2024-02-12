@@ -2,6 +2,7 @@ import React from 'react'
 import App from '../layouts/App'
 import { NavLink, useNavigate } from 'react-router-dom'
 import Header from '../../components/Header/Header'
+import { IoMdNotifications } from 'react-icons/io'
 
 export default function Home() {
     const navigate = useNavigate()
@@ -18,10 +19,10 @@ export default function Home() {
                         </div>
                         <div>
                             <div>
-                                <h3 className='text-gray-custom font-medium'>Saldo</h3>
+                                <h3 className='text-slate-500 font-medium'>Saldo</h3>
                             </div>
                             <div>
-                                <h3 className='text-gray-custom font-semibold'>Rp. 1.000.000</h3>
+                                <h3 className='text-slate-500 font-semibold'>Rp. 1.000.000</h3>
                             </div>
                         </div>
                     </div>
@@ -38,23 +39,23 @@ export default function Home() {
                     <div className='flex justify-center cursor-pointer' onClick={() => navigate('/account')}>
                         <div className='flex-col'>
                             <img src="/images/user.png" alt="user" className='w-7 h-7 mx-auto' />
-                            <h4 className='font-medium text-sm text-gray-custom text-center'>Akun</h4>
+                            <h4 className='font-medium text-sm text-slate-500 text-center'>Akun</h4>
                         </div>
                     </div>
 
-                    <div className='flex justify-center cursor-pointer'>
+                    <NavLink to={'/notification'} className='flex justify-center'>
                         <div className='flex-col'>
-                            <img src="/images/user.png" alt="user" className='w-7 h-7 mx-auto' />
-                            <h4 className='font-medium text-sm text-gray-custom text-center'>Pemberitahuan</h4>
+                            <img src="/images/icons/bell_notif.png" alt="user" className='w-7 h-7 mx-auto' />
+                            <h4 className='font-medium text-sm text-slate-500 text-center'>Pemberitahuan</h4>
                         </div>
-                    </div>
+                    </NavLink>
 
-                    <div className='flex justify-center cursor-pointer'>
+                    <NavLink to={'/customer-service'} className='flex justify-center'>
                         <div className='flex-col'>
-                            <img src="/images/user.png" alt="user" className='w-7 h-7 mx-auto' />
-                            <h4 className='font-medium text-sm text-gray-custom text-center'>Hubungi Kami</h4>
+                            <img src="/images/cs.png" alt="user" className='w-7 h-7 mx-auto' />
+                            <h4 className='font-medium text-sm text-slate-500 text-center'>Hubungi Kami</h4>
                         </div>
-                    </div>
+                    </NavLink>
                 </div>
             </div>
 
@@ -62,22 +63,24 @@ export default function Home() {
                 <h1 className='text-xl font-bold'>Slider</h1>
             </div>
 
-            <div className='bg-white h-24 mt-2 p-4 cursor-pointer'>
-                <div className="flex justify-between gap-2">
-                    <div>
-                        <h1 className='text-base font-semibold text-lg'>Punya Kendala?</h1>
-                        <h1 className='text-gray-custom text-sm'>Kamu bisa menghubungi tim customer server kami</h1>
-                    </div>
-                    <div>
-                        <img src="/images/cs.png" alt="customer service" className='h-20 w-20' />
+            <NavLink to={'/customer-service'}>
+                <div className='bg-white h-24 mt-2 p-4'>
+                    <div className="flex justify-between gap-2">
+                        <div>
+                            <h1 className='text-base font-semibold text-lg'>Punya Kendala?</h1>
+                            <h1 className='text-slate-600 text-sm'>Kamu bisa menghubungi tim customer server kami</h1>
+                        </div>
+                        <div>
+                            <img src="/images/cs.png" alt="customer service" className='h-20 w-20' />
+                        </div>
                     </div>
                 </div>
-            </div>
+            </NavLink>
 
             {/* List 1 */}
             <div className='bg-white h-auto p-4 mt-2'>
                 <div>
-                    <p className='text-sm text-gray-custom font-semibold'>Isi Ulang Sehari-Hari</p>
+                    <p className='text-sm text-slate-500 font-semibold'>Isi Ulang Sehari-Hari</p>
                     <div className='border my-1' />
                 </div>
 
@@ -86,28 +89,28 @@ export default function Home() {
                         <div className='flex cursor-pointer'>
                             <div className='flex-col w-full'>
                                 <img src="/images/pulsa.png" alt="Pulsa" className='w-7 h-7 mx-auto' />
-                                <h4 className='font-medium text-sm text-gray-custom text-center'>Pulsa</h4>
+                                <h4 className='font-medium text-sm text-slate-500 text-center'>Pulsa</h4>
                             </div>
                         </div>
 
                         <div className='flex cursor-pointer'>
                             <div className='flex-col w-full'>
                                 <img src="/images/data.png" alt="Paket Data" className='w-7 h-7 mx-auto' />
-                                <h4 className='font-medium text-sm text-gray-custom text-center'>Paket Data</h4>
+                                <h4 className='font-medium text-sm text-slate-500 text-center'>Paket Data</h4>
                             </div>
                         </div>
 
                         <div className='flex cursor-pointer'>
                             <div className='flex-col w-full'>
                                 <img src="/images/phone.png" alt="Paket Tlp" className='w-7 h-7 mx-auto' />
-                                <h4 className='font-medium text-sm text-gray-custom text-center'>Paket Tlp</h4>
+                                <h4 className='font-medium text-sm text-slate-500 text-center'>Paket Tlp</h4>
                             </div>
                         </div>
 
                         <div className='flex cursor-pointer'>
                             <div className='flex-col w-full'>
                                 <img src="/images/chat.png" alt="Paket SMS" className='w-7 h-7 mx-auto' />
-                                <h4 className='font-medium text-sm text-gray-custom text-center'>Paket SMS</h4>
+                                <h4 className='font-medium text-sm text-slate-500 text-center'>Paket SMS</h4>
                             </div>
                         </div>
                     </div>
@@ -116,14 +119,14 @@ export default function Home() {
                         <div className='flex cursor-pointer'>
                             <div className='flex-col w-full'>
                                 <img src="/images/token.png" alt="Token PLN" className='w-7 h-7 mx-auto' />
-                                <h4 className='font-medium text-sm text-gray-custom text-center'>Token PLN</h4>
+                                <h4 className='font-medium text-sm text-slate-500 text-center'>Token PLN</h4>
                             </div>
                         </div>
 
                         <div className='flex cursor-pointer'>
                             <div className='flex-col w-full'>
                                 <img src="/images/sim.png" alt="Masa Aktif" className='w-7 h-7 mx-auto' />
-                                <h4 className='font-medium text-sm text-gray-custom text-center'>Masa Aktif</h4>
+                                <h4 className='font-medium text-sm text-slate-500 text-center'>Masa Aktif</h4>
                             </div>
                         </div>
                     </div>
@@ -133,7 +136,7 @@ export default function Home() {
             {/* List 2 */}
             <div className='bg-white h-auto p-4 mt-2'>
                 <div>
-                    <p className='text-sm text-gray-custom font-semibold'>Dompet Digital</p>
+                    <p className='text-sm text-slate-500 font-semibold'>Dompet Digital</p>
                     <div className='border my-1' />
                 </div>
 
@@ -142,28 +145,28 @@ export default function Home() {
                         <div className='flex cursor-pointer'>
                             <div className='flex-col w-full'>
                                 <img src="/images/pulsa.png" alt="Pulsa" className='w-7 h-7 mx-auto' />
-                                <h4 className='font-medium text-sm text-gray-custom text-center'>Pulsa</h4>
+                                <h4 className='font-medium text-sm text-slate-500 text-center'>Pulsa</h4>
                             </div>
                         </div>
 
                         <div className='flex cursor-pointer'>
                             <div className='flex-col w-full'>
                                 <img src="/images/data.png" alt="Paket Data" className='w-7 h-7 mx-auto' />
-                                <h4 className='font-medium text-sm text-gray-custom text-center'>Paket Data</h4>
+                                <h4 className='font-medium text-sm text-slate-500 text-center'>Paket Data</h4>
                             </div>
                         </div>
 
                         <div className='flex cursor-pointer'>
                             <div className='flex-col w-full'>
                                 <img src="/images/phone.png" alt="Paket Tlp" className='w-7 h-7 mx-auto' />
-                                <h4 className='font-medium text-sm text-gray-custom text-center'>Paket Tlp</h4>
+                                <h4 className='font-medium text-sm text-slate-500 text-center'>Paket Tlp</h4>
                             </div>
                         </div>
 
                         <div className='flex cursor-pointer'>
                             <div className='flex-col w-full'>
                                 <img src="/images/chat.png" alt="Paket SMS" className='w-7 h-7 mx-auto' />
-                                <h4 className='font-medium text-sm text-gray-custom text-center'>Paket SMS</h4>
+                                <h4 className='font-medium text-sm text-slate-500 text-center'>Paket SMS</h4>
                             </div>
                         </div>
                     </div>
@@ -172,14 +175,14 @@ export default function Home() {
                         <div className='flex cursor-pointer'>
                             <div className='flex-col w-full'>
                                 <img src="/images/token.png" alt="Token PLN" className='w-7 h-7 mx-auto' />
-                                <h4 className='font-medium text-sm text-gray-custom text-center'>Token PLN</h4>
+                                <h4 className='font-medium text-sm text-slate-500 text-center'>Token PLN</h4>
                             </div>
                         </div>
 
                         <div className='flex cursor-pointer'>
                             <div className='flex-col w-full'>
                                 <img src="/images/sim.png" alt="Masa Aktif" className='w-7 h-7 mx-auto' />
-                                <h4 className='font-medium text-sm text-gray-custom text-center'>Masa Aktif</h4>
+                                <h4 className='font-medium text-sm text-slate-500 text-center'>Masa Aktif</h4>
                             </div>
                         </div>
                     </div>
@@ -189,7 +192,7 @@ export default function Home() {
             {/* List 3 */}
             <div className='bg-white h-auto p-4 mt-2'>
                 <div>
-                    <p className='text-sm text-gray-custom font-semibold'>Tagihan</p>
+                    <p className='text-sm text-slate-500 font-semibold'>Tagihan</p>
                     <div className='border my-1' />
                 </div>
 
@@ -198,28 +201,28 @@ export default function Home() {
                         <div className='flex cursor-pointer'>
                             <div className='flex-col w-full'>
                                 <img src="/images/pulsa.png" alt="Pulsa" className='w-7 h-7 mx-auto' />
-                                <h4 className='font-medium text-sm text-gray-custom text-center'>Pulsa</h4>
+                                <h4 className='font-medium text-sm text-slate-500 text-center'>Pulsa</h4>
                             </div>
                         </div>
 
                         <div className='flex cursor-pointer'>
                             <div className='flex-col w-full'>
                                 <img src="/images/data.png" alt="Paket Data" className='w-7 h-7 mx-auto' />
-                                <h4 className='font-medium text-sm text-gray-custom text-center'>Paket Data</h4>
+                                <h4 className='font-medium text-sm text-slate-500 text-center'>Paket Data</h4>
                             </div>
                         </div>
 
                         <div className='flex cursor-pointer'>
                             <div className='flex-col w-full'>
                                 <img src="/images/phone.png" alt="Paket Tlp" className='w-7 h-7 mx-auto' />
-                                <h4 className='font-medium text-sm text-gray-custom text-center'>Paket Tlp</h4>
+                                <h4 className='font-medium text-sm text-slate-500 text-center'>Paket Tlp</h4>
                             </div>
                         </div>
 
                         <div className='flex cursor-pointer'>
                             <div className='flex-col w-full'>
                                 <img src="/images/chat.png" alt="Paket SMS" className='w-7 h-7 mx-auto' />
-                                <h4 className='font-medium text-sm text-gray-custom text-center'>Paket SMS</h4>
+                                <h4 className='font-medium text-sm text-slate-500 text-center'>Paket SMS</h4>
                             </div>
                         </div>
                     </div>
@@ -228,14 +231,14 @@ export default function Home() {
                         <div className='flex cursor-pointer'>
                             <div className='flex-col w-full'>
                                 <img src="/images/token.png" alt="Token PLN" className='w-7 h-7 mx-auto' />
-                                <h4 className='font-medium text-sm text-gray-custom text-center'>Token PLN</h4>
+                                <h4 className='font-medium text-sm text-slate-500 text-center'>Token PLN</h4>
                             </div>
                         </div>
 
                         <div className='flex cursor-pointer'>
                             <div className='flex-col w-full'>
                                 <img src="/images/sim.png" alt="Masa Aktif" className='w-7 h-7 mx-auto' />
-                                <h4 className='font-medium text-sm text-gray-custom text-center'>Masa Aktif</h4>
+                                <h4 className='font-medium text-sm text-slate-500 text-center'>Masa Aktif</h4>
                             </div>
                         </div>
                     </div>
@@ -245,7 +248,7 @@ export default function Home() {
             {/* List 4 */}
             <div className='bg-white h-auto p-4 mt-2'>
                 <div>
-                    <p className='text-sm text-gray-custom font-semibold'>Produk Lainnya</p>
+                    <p className='text-sm text-slate-500 font-semibold'>Produk Lainnya</p>
                     <div className='border my-1' />
                 </div>
 
@@ -254,28 +257,28 @@ export default function Home() {
                         <div className='flex cursor-pointer'>
                             <div className='flex-col w-full'>
                                 <img src="/images/pulsa.png" alt="Pulsa" className='w-7 h-7 mx-auto' />
-                                <h4 className='font-medium text-sm text-gray-custom text-center'>Pulsa</h4>
+                                <h4 className='font-medium text-sm text-slate-500 text-center'>Pulsa</h4>
                             </div>
                         </div>
 
                         <div className='flex cursor-pointer'>
                             <div className='flex-col w-full'>
                                 <img src="/images/data.png" alt="Paket Data" className='w-7 h-7 mx-auto' />
-                                <h4 className='font-medium text-sm text-gray-custom text-center'>Paket Data</h4>
+                                <h4 className='font-medium text-sm text-slate-500 text-center'>Paket Data</h4>
                             </div>
                         </div>
 
                         <div className='flex cursor-pointer'>
                             <div className='flex-col w-full'>
                                 <img src="/images/phone.png" alt="Paket Tlp" className='w-7 h-7 mx-auto' />
-                                <h4 className='font-medium text-sm text-gray-custom text-center'>Paket Tlp</h4>
+                                <h4 className='font-medium text-sm text-slate-500 text-center'>Paket Tlp</h4>
                             </div>
                         </div>
 
                         <div className='flex cursor-pointer'>
                             <div className='flex-col w-full'>
                                 <img src="/images/chat.png" alt="Paket SMS" className='w-7 h-7 mx-auto' />
-                                <h4 className='font-medium text-sm text-gray-custom text-center'>Paket SMS</h4>
+                                <h4 className='font-medium text-sm text-slate-500 text-center'>Paket SMS</h4>
                             </div>
                         </div>
                     </div>
@@ -284,14 +287,14 @@ export default function Home() {
                         <div className='flex cursor-pointer'>
                             <div className='flex-col w-full'>
                                 <img src="/images/token.png" alt="Token PLN" className='w-7 h-7 mx-auto' />
-                                <h4 className='font-medium text-sm text-gray-custom text-center'>Token PLN</h4>
+                                <h4 className='font-medium text-sm text-slate-500 text-center'>Token PLN</h4>
                             </div>
                         </div>
 
                         <div className='flex cursor-pointer'>
                             <div className='flex-col w-full'>
                                 <img src="/images/sim.png" alt="Masa Aktif" className='w-7 h-7 mx-auto' />
-                                <h4 className='font-medium text-sm text-gray-custom text-center'>Masa Aktif</h4>
+                                <h4 className='font-medium text-sm text-slate-500 text-center'>Masa Aktif</h4>
                             </div>
                         </div>
                     </div>
