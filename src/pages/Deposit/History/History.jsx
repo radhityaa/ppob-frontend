@@ -1,10 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import App from '../../layouts/App'
 import Header from '../../../components/Header/Header'
 import { useNavigate } from 'react-router-dom'
+import Axios from '../../../utils/Axios'
+import { showNotification } from '../../../utils/Notif'
+import FormatCurrency from '../../../utils/FormatCurrency'
+import FormatDate from '../../../utils/FormatDate'
 
 export default function History() {
     const navigate = useNavigate()
+    const [data, setData] = useState()
+
+    async function fetchData() {
+        await Axios.get('/deposit')
+            .then(res => setData(res.data.data))
+            .catch(err => showNotification(err.response?.data?.message, 'error'))
+    }
+
+    useEffect(() => {
+        fetchData()
+    }, [])
 
     return (
         <App title='Riwayat Deposit'>
@@ -19,38 +34,18 @@ export default function History() {
                         <div className='font-semibold text-lg text-gray-custom'>Riwayat Deposit</div>
                     </div>
                     <div className='mt-5 space-y-2'>
-                        <div className='border-b-2 border-dashed border-gray-custom p-2 cursor-pointer' onClick={() => navigate('/payment/id')}>
-                            <div className="flex items-center justify-between text-sm space-y-2">
-                                <div>Rp. 50.000</div>
-                                <div className='bg-yellow-300 rounded-full px-4 py-0.5 text-white font-semibold'>Pending</div>
+                        {data?.map((item, index) => (
+                            <div className='border-b-2 border-dashed border-gray-custom p-2 cursor-pointer' onClick={() => navigate(`/payment/${item.reference}`)} key={index}>
+                                <div className="flex items-center justify-between text-sm space-y-2">
+                                    <div>{FormatCurrency(item.amount)}</div>
+                                    <div className={`bg-${item.status === 'PAID' ? 'green' : item.status === 'UNPAID' ? 'yellow' : 'red'}-400 rounded-full px-4 py-0.5 text-white font-semibold`}>{item.status === 'PAID' ? 'Sukses' : item.status === 'UNPAID' ? 'Pending' : 'Gagal'}</div>
+                                </div>
+                                <div className="flex items-center justify-between text-sm space-y-2">
+                                    <div>{item.payment_name}</div>
+                                    <div>{FormatDate(item.createdAt)}</div>
+                                </div>
                             </div>
-                            <div className="flex items-center justify-between text-sm space-y-2">
-                                <div>Bank BCA</div>
-                                <div>09/02/2024 21:53</div>
-                            </div>
-                        </div>
-
-                        <div className='border-b-2 border-dashed border-gray-custom p-2 cursor-pointer' onClick={() => navigate('/payment/id')}>
-                            <div className="flex items-center justify-between text-sm space-y-2">
-                                <div>Rp. 50.000</div>
-                                <div className='bg-green-400 rounded-full px-4 py-0.5 text-white font-semibold'>Sukses</div>
-                            </div>
-                            <div className="flex items-center justify-between text-sm space-y-2">
-                                <div>Bank BCA</div>
-                                <div>09/02/2024 21:53</div>
-                            </div>
-                        </div>
-
-                        <div className='border-b-2 border-dashed border-gray-custom p-2 cursor-pointer' onClick={() => navigate('/payment/id')}>
-                            <div className="flex items-center justify-between text-sm space-y-2">
-                                <div>Rp. 50.000</div>
-                                <div className='bg-red-400 rounded-full px-4 py-0.5 text-white font-semibold'>Gagal</div>
-                            </div>
-                            <div className="flex items-center justify-between text-sm space-y-2">
-                                <div>Bank BCA</div>
-                                <div>09/02/2024 21:53</div>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </div>

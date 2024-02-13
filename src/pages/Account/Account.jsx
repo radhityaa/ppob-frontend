@@ -1,23 +1,30 @@
 import { Tab } from '@headlessui/react'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import Header from '../../components/Header/Header'
 import PencilSquare from '../../components/PencilSquare/PencilSquare'
-import App from '../layouts/App'
 import FormatCurrency from '../../utils/FormatCurrency'
 import FormatDate from '../../utils/FormatDate'
-import axios from 'axios'
+import { showNotification } from '../../utils/Notif.js'
+import App from '../layouts/App'
+import Axios from '../../utils/Axios.js'
 
 export default function Account() {
     const { user, loading } = useSelector((state) => state.user)
+    const navigate = useNavigate()
 
     function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
     }
 
-    function handleLogout() {
-        alert('oke')
+    async function handleLogout() {
+        await Axios.delete('/users/logout')
+            .then(res => {
+                showNotification(res.data.message, 'success')
+                navigate('/')
+            })
+            .catch(err => showNotification(err.response?.data?.message, 'error'))
     }
 
     const [categories, setCategories] = useState({

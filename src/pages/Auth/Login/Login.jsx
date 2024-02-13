@@ -3,7 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import ButtonOutline from '../../../components/ButtonOutline/ButtonOutline'
 import InputFloating from '../../../components/InputFloating/InputFloating'
 import Guest from '../../layouts/Guest'
-import axios from 'axios'
+import Axios from '../../../utils/Axios'
 import { Notyf } from 'notyf'
 import Cookies from 'js-cookie'
 
@@ -27,19 +27,25 @@ export default function Login() {
             password
         }
 
-        await axios.post('/auth/login', request)
+        await Axios.post('/auth/login', request)
             .then(res => {
                 notyf.success(res.data.message)
                 Cookies.set('token', res.data.data)
                 navigate('/dashboard')
             })
-            .catch(err => {
+            .catch(async err => {
                 if (Array.isArray(err.response.data.message)) {
                     err.response.data.message.forEach(errorMessage => {
                         notyf.error(errorMessage.msg)
                     })
                 } else {
                     notyf.error(err.response.data.message)
+                    if (err.response.data.message === 'Akun Belum Verifikasi') {
+                        await Axios.post('/otp/send', request)
+                        navigate('/verifikasi')
+                        Cookies.set('username', request.username)
+                        Cookies.set('email', request.email)
+                    }
                 }
             })
     }
@@ -67,6 +73,7 @@ export default function Login() {
 
                     <div className='mt-8'>
                         <p className='text-white'>Belum punya akun? <NavLink to={'/register'} className='underline font-semibold'>Daftar Sekarang</NavLink></p>
+                        <p className='text-white'>Belum Verifikasi akun? <NavLink to={'/verifikasi'} className='underline font-semibold'>Verifikasi Sekarang</NavLink></p>
                     </div>
 
                     <div className='pt-7'>

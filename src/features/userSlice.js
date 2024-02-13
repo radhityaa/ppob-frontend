@@ -1,12 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import Axios from "../utils/Axios";
 
 export const detailUser = createAsyncThunk('user/detail', async (token) => {
-    const { data } = await axios.get('/users/current', {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    })
+    const { data } = await Axios.get('/users/current')
     return data.data
 })
 

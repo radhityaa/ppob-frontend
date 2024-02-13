@@ -1,4 +1,4 @@
-import axios from 'axios'
+import Axios from '../utils/Axios'
 import Cookies from 'js-cookie'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -8,7 +8,7 @@ function Authenticated(props) {
     const token = Cookies.get('token')
 
     const cekToken = async () => {
-        await axios.get('/protected', {
+        await Axios.get('/protected', {
             headers: {
                 Accept: 'application/json',
                 Authorization: `Bearer ${token}`

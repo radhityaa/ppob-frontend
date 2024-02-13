@@ -1,11 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import Guest from '../../layouts/Guest'
 import ButtonOutline from '../../../components/ButtonOutline/ButtonOutline'
 import InputFloating from '../../../components/InputFloating/InputFloating'
+import Axios from "../../../utils/Axios"
+import { showNotification } from '../../../utils/Notif'
 
 export default function ForgotPassword() {
     const navigate = useNavigate()
+
+    const [email, setEmail] = useState()
+
+    async function onSubmit(e) {
+        e.preventDefault()
+
+        await Axios.post('/auth/forgot', { email: email })
+            .then(res => {
+                showNotification(res.data.message, 'success')
+                navigate('/')
+            })
+            .catch(err => {
+                if (Array.isArray(err.response.data.message)) {
+                    err.response.data.message.forEach(errorMessage => {
+                        showNotification(errorMessage.msg, 'error')
+                    })
+                } else {
+                    showNotification(err.response.data.message, 'error')
+                }
+            })
+    }
 
     return (
         <Guest title='Lupa Kata Sandi'>
@@ -15,9 +38,9 @@ export default function ForgotPassword() {
             </div>
 
             <div>
-                <form className='pt-10'>
+                <form className='pt-10' onSubmit={onSubmit}>
                     <div className='space-y-3 py-2'>
-                        <InputFloating label={'Email'} type='email' color='white' required />
+                        <InputFloating label={'Email'} type='email' value={email} onChange={(e) => setEmail(e.target.value)} color='white' required />
                     </div>
 
                     <div>
@@ -25,7 +48,7 @@ export default function ForgotPassword() {
                     </div>
 
                     <div className='pt-10'>
-                        <ButtonOutline onClick={() => navigate('/')}>Kirim Kode Verifikasi</ButtonOutline>
+                        <ButtonOutline type='submit'>Reset Password</ButtonOutline>
                     </div>
                 </form>
             </div>

@@ -3,9 +3,13 @@ import App from '../layouts/App'
 import { NavLink, useNavigate } from 'react-router-dom'
 import Header from '../../components/Header/Header'
 import { IoMdNotifications } from 'react-icons/io'
+import { useSelector } from 'react-redux'
+import FormatCurrency from '../../utils/FormatCurrency'
 
 export default function Home() {
     const navigate = useNavigate()
+
+    const { loading, user } = useSelector((state) => state.user)
 
     return (
         <App>
@@ -22,7 +26,7 @@ export default function Home() {
                                 <h3 className='text-slate-500 font-medium'>Saldo</h3>
                             </div>
                             <div>
-                                <h3 className='text-slate-500 font-semibold'>Rp. 1.000.000</h3>
+                                <h3 className='text-slate-500 font-semibold'>{loading ? 'Loading' : FormatCurrency(user?.saldo)}</h3>
                             </div>
                         </div>
                     </div>
@@ -86,12 +90,12 @@ export default function Home() {
 
                 <div>
                     <div className='grid grid-cols-4 mt-5'>
-                        <div className='flex cursor-pointer'>
+                        <NavLink className='flex cursor-pointer' to={'/prepaid/pulsa'}>
                             <div className='flex-col w-full'>
                                 <img src="/images/pulsa.png" alt="Pulsa" className='w-7 h-7 mx-auto' />
                                 <h4 className='font-medium text-sm text-slate-500 text-center'>Pulsa</h4>
                             </div>
-                        </div>
+                        </NavLink>
 
                         <div className='flex cursor-pointer'>
                             <div className='flex-col w-full'>

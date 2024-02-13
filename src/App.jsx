@@ -8,6 +8,7 @@ import * as Middleware from './middleware/App'
 const Login = lazy(() => import("./pages/Auth/Login"))
 const Register = lazy(() => import("./pages/Auth/Register"))
 const ForgotPassword = lazy(() => import("./pages/Auth/ForgotPassword"))
+const ResetPassword = lazy(() => import("./pages/Auth/ForgotPassword/PasswordReset"))
 const VerifOtp = lazy(() => import("./pages/Auth/VerifOtp"))
 
 // NOTE - Home
@@ -40,6 +41,9 @@ const CustomerService = lazy(() => import('./pages/CustomerService'))
 // NOTE - Setting
 const Setting = lazy(() => import('./pages/Setting'))
 
+// NOTE - Prepaid
+const Pulsa = lazy(() => import('./pages/Prepaid/Pulsa'))
+
 export default function App() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
@@ -50,6 +54,7 @@ export default function App() {
         <Route path='/' element={<Middleware.Guest render={<Login />} />} />
         <Route path='/register' element={<Middleware.Guest render={<Register />} />} />
         <Route path='/forgot-password' element={<Middleware.Guest render={<ForgotPassword />} />} />
+        <Route path='/password-reset/:user/:token' element={<Middleware.Guest render={<ResetPassword />} />} />
         <Route path='/verifikasi' element={<Middleware.Guest render={<VerifOtp />} />} />
 
         {/* NOTE - Home */}
@@ -59,7 +64,7 @@ export default function App() {
         <Route path='/deposit' element={<Middleware.Authenticated render={<Deposit />} />} />
         <Route path='/deposit/history' element={<Middleware.Authenticated render={<History />} />} />
         <Route path='/payment-method' element={<Middleware.Authenticated render={<PaymentMethod />} />} />
-        <Route path='/payment/id' element={<Middleware.Authenticated render={<Payment />} />} />
+        <Route path='/payment/:reference' element={<Middleware.Authenticated render={<Payment />} />} />
 
         {/* NOTE - Account */}
         <Route path='/account' element={<Middleware.Authenticated render={<Account />} />} />
@@ -81,6 +86,9 @@ export default function App() {
 
         {/* NOTE - Setting */}
         <Route path='/setting' element={<Middleware.Authenticated render={<Setting />} />} />
+
+        {/* NOTE - Prepaid */}
+        <Route path='/prepaid/pulsa' element={<Middleware.Authenticated render={<Pulsa />} />} />
       </Routes>
     </Suspense>
   )
