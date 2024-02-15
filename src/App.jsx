@@ -43,6 +43,10 @@ const Setting = lazy(() => import('./pages/Setting'))
 
 // NOTE - Prepaid
 const Pulsa = lazy(() => import('./pages/Prepaid/Pulsa'))
+const Internet = lazy(() => import('./pages/Prepaid/Internet'))
+const Games = lazy(() => import('./pages/Prepaid/Games'))
+const Voucher = lazy(() => import('./pages/Prepaid/Voucher'))
+const Token = lazy(() => import('./pages/Prepaid/Token'))
 
 export default function App() {
   return (
@@ -89,6 +93,10 @@ export default function App() {
 
         {/* NOTE - Prepaid */}
         <Route path='/prepaid/pulsa' element={<Middleware.Authenticated render={<Pulsa />} />} />
+        <Route path='/prepaid/internet' element={<Middleware.Authenticated render={<Internet />} />} />
+        <Route path='/prepaid/games' element={<Middleware.Authenticated render={<Games />} />} />
+        <Route path='/prepaid/voucher' element={<Middleware.Authenticated render={<Voucher />} />} />
+        <Route path='/prepaid/token' element={<Middleware.Authenticated render={<Token />} />} />
       </Routes>
     </Suspense>
   )

@@ -7,7 +7,7 @@ import { getProductFilter } from "../../../features/productSlice"
 import { getBrandFromPhoneNumber } from "../../../utils/ValidatePhoneNumber"
 import App from "../../layouts/App"
 
-export default function Pulsa() {
+export default function Voucher() {
     const { user } = useSelector((state) => state.user)
     const [target, setTarget] = useState('')
     const [brand, setBrand] = useState('')
@@ -26,7 +26,7 @@ export default function Pulsa() {
 
         if (brand) {
             setShowProduct(true)
-            dispatch(getProductFilter(`&category=pulsa&brand=${brand}&price=asc`))
+            dispatch(getProductFilter(`&category=voucher&brand=${brand}&price=asc`))
         } else {
             setShowProduct(false)
         }
@@ -35,29 +35,29 @@ export default function Pulsa() {
     function handleFilterCategory(buttonName) {
         setActiveButton(buttonName)
         if (buttonName === 'All') {
-            dispatch(getProductFilter(`&category=pulsa&brand=${brand}`))
+            dispatch(getProductFilter(`&category=voucher&brand=${brand}`))
         } else {
-            dispatch(getProductFilter(`&category=pulsa&type=${buttonName}&brand=${brand}`))
+            dispatch(getProductFilter(`&category=voucher&type=${buttonName}&brand=${brand}`))
         }
     }
 
     function handleSearch(keyword) {
-        dispatch(getProductFilter(`&category=pulsa&brand=${brand}&search=${keyword}`))
+        dispatch(getProductFilter(`&category=voucher&brand=${brand}&search=${keyword}`))
     }
 
     const productTypes = data?.map(product => product.type)
     const types = Array.from(new Set(productTypes))
 
     return (
-        <App title='Pulsa'>
+        <App title='Voucher Data'>
             <Header />
 
             <div className='bg-white rounded-lg -mt-10 mx-3 p-4'>
                 <div className="flex items-center gap-3">
                     <div>
-                        <img src="/images/smartphone.png" width={40} height={40} />
+                        <img src="/images/voucher.png" width={40} height={40} />
                     </div>
-                    <div className="text-lg font-semibold text-slate-700">Pulsa</div>
+                    <div className="text-lg font-semibold text-slate-700">Voucher Data</div>
                 </div>
 
                 <div className="mt-7">
@@ -80,7 +80,6 @@ export default function Pulsa() {
                         types={types}
                         data={data}
                         user={user}
-                        target={target}
                     />
                 </>
             )}
