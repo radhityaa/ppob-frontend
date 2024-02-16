@@ -7,20 +7,23 @@ import { getProductFilter } from "../../../features/productSlice"
 import FormatCurrency from "../../../utils/FormatCurrency"
 import App from "../../layouts/App"
 import Select from 'react-select'
+import { getCategory } from "../../../features/categorySlice"
 
 export default function Games() {
     const { user } = useSelector((state) => state.user)
     const [target, setTarget] = useState(null)
     const [showProduk, setShowProduct] = useState(false)
     const [selectedGame, setSelectedGame] = useState(null)
+    const dispatch = useDispatch()
 
     const { data, brands } = useSelector((state) => state.products)
-    const dispatch = useDispatch()
+    const categories = useSelector((state) => state.category.data)
 
     const [isOpen, setIsOpen] = useState(false)
 
     useEffect(() => {
         dispatch(getProductFilter(`&category=games&price=asc`))
+        dispatch(getCategory('games'))
 
         const handleScroll = () => {
             if (isOpen) {
@@ -64,7 +67,7 @@ export default function Games() {
                     <label>Pilih Game</label>
                     <Select
                         className="mt-3"
-                        options={brands}
+                        options={categories}
                         onChange={handleChangeGame}
                         value={selectedGame}
                     />
